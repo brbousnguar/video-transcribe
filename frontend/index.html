@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Transcribe</title>
+    <!-- Import Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #transcribedText {
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Preview Video</h2>
+                <video id="videoPreview" controls class="w-100"></video>
+                <h2 class="mt-4">Upload Video</h2>
+                <input type="file" id="videoUpload" class="form-control" />
+                <button id="transcribeButton" type="button" class="btn btn-primary mt-2">Transcribe</button>
+            </div>
+            <div class="col-lg-6">
+                <h2>Transcribed Text</h2>
+                <div id="transcribedText" class="border border-primary h-100"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle file selection and video preview
+        document.getElementById('videoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const videoElement = document.getElementById('videoPreview');
+            
+            if (file) {
+                const url = URL.createObjectURL(file);
+                videoElement.src = url;
+                console.log('Selected file:', file.name, 'Size:', file.size, 'Type:', file.type);
+            }
+        });
+
+        document.getElementById('transcribeButton').addEventListener('click', function() {
+            const fileInput = document.getElementById('videoUpload');
+            const resultDiv = document.getElementById('transcribedText');
+            const uploadBtn = document.getElementById('transcribeButton');
+            
+            if (!fileInput.files[0]) {
+                alert('Please select a video file first.');
+                return;
+            }
+            
+            // Disable button and show loading state
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Processing...';
+            resultDiv.innerHTML = '<div class="text-center text-muted font-italic p-3">⏳ Transcribing your video...</div>';
+            
+            // TODO: Implement actual transcription
+            // For now, simulate processing
+            setTimeout(() => {
+                resultDiv.innerHTML = `<div class="p-3">Hello and welcome to this video tutorial. Today we'll be learning about web development fundamentals including HTML, CSS, and JavaScript. These technologies form the backbone of modern web applications.
+
+In this session, we'll start by exploring HTML which stands for HyperText Markup Language. HTML is used to create the structure and content of web pages using various elements and tags.
+
+Next, we'll dive into CSS or Cascading Style Sheets, which is responsible for the visual presentation and layout of our web pages. CSS allows us to control colors, fonts, spacing, and positioning.
+
+Finally, we'll cover JavaScript, a programming language that adds interactivity and dynamic behavior to our websites. With JavaScript, we can respond to user actions, manipulate content, and create engaging user experiences.
+
+Note: This is a sample transcription. Backend integration needed for actual speech-to-text functionality.</div>`;
+                
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Transcribe';
+            }, 3000);
+        });
+    </script>
+    <!-- Import Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

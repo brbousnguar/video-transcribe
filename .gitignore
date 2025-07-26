@@ -1,0 +1,6 @@
+.vscode
+
+backend/node_modules
+backend/upload
+*/.env
+

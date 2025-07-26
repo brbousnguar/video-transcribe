@@ -77,5 +77,24 @@ Note: This is a sample transcription. Backend integration needed for actual spee
     </script>
     <!-- Import Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        const videoUpload = document.getElementById("videoUpload");
+        const videoPreview = document.getElementById("videoPreview");
+        const transcribeButton = document.getElementById("transcribeButton");
+        const transcribedText = document.getElementById("transcribedText");
+        
+        let selectedFile;
+        
+        videoUpload.addEventListener("change", function(e) {
+            if (e.target.files && e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                let selectedVideo = URL.createObjectURL(selectedFile);
+                
+                videoPreview.src = selectedVideo;
+            }
+        });
+    </script>
 </body>
 </html>

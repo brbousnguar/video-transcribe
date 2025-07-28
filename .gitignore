@@ -1,6 +1,6 @@
 .vscode
 
 backend/node_modules
-backend/upload
+backend/uploads
 */.env
 

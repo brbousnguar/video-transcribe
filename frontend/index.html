@@ -101,7 +101,7 @@ Note: This is a sample transcription. Backend integration needed for actual spee
             formData.append("file", selectedFile);
 
             try {
-                let response = await axios.post("BACKEND_URL", formData, {
+                let response = await axios.post("http://localhost:1330/transcribe", formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -110,7 +110,7 @@ Note: This is a sample transcription. Backend integration needed for actual spee
                 if( response.data){
                     displayTranscription(response);
                 }
-            } catch (e) {
+            } catch (error) {
                 console.error(error);
 
                 alert("Video transcription failed.");

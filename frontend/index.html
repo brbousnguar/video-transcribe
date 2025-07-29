@@ -33,7 +33,11 @@
             </div>
             <div class="col-lg-6">
                 <h2>Transcribed Text</h2>
-                <div id="transcribedText" class="border border-primary h-100"></div>
+                
+                <!-- <div id="transcribedText" class="border border-primary h-100"></div>   -->
+                
+                <textarea id="transcribedText" cols="60" rows="30" >    </textarea>
+
             </div>
         </div>
     </div>
@@ -64,13 +68,9 @@
             // Disable button and show loading state
             uploadBtn.disabled = true;
             uploadBtn.textContent = 'Processing...';
-            resultDiv.innerHTML = '<div class="text-center text-muted font-italic p-3">⏳ Transcribing your video...</div>';
+            resultDiv.value = '⏳ Transcribing your video...';
             
             
-                
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Transcribe';
-            }, 3000);
         });
     </script>
     <!-- Import Axios -->
@@ -118,7 +118,7 @@
                 console.error(error);
 
                 transcriptionProgressBar.style.visibility = "hidden";
-
+                
                 alert("Video transcription failed.");
             }
         }
@@ -126,7 +126,7 @@
         transcribeButton.addEventListener("click", transcribeVideo);
 
         function displayTranscription(response) {
-            transcribedText.innerHTML = response.data.text;
+            transcribedText.value = response.data.text;
         }
         
     </script>
